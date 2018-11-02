@@ -1,6 +1,6 @@
-import deton
+import src
 
-application = deton.create_app()
+application = src.create_app()
 
 if __name__ == "__main__":
     application.run()

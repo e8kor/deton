@@ -18,7 +18,7 @@ def create_app(test_config = None):
     except OSError:
         pass
 
-    from deton import cache, api
+    from src import cache, api
     cache.init_app(app)
     app.register_blueprint(api.bp)
 

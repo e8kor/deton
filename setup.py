@@ -6,7 +6,7 @@ with io.open('README.rst', 'rt', encoding='utf8') as f:
 
 setup(
     name = 'deton',
-    packages=['deton'],
+    packages=['src'],
     version = '1.0.0',
     license='BSD',
     author = "Eugene Korniichuk",

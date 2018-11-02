@@ -3,7 +3,7 @@ Link Management Routes
 """
 import functools
 import random
-from deton.cache import get_cache
+from src.cache import get_cache
 from flask import Blueprint, redirect, request, current_app as app, json, jsonify
 
 bp = Blueprint('api', __name__)
