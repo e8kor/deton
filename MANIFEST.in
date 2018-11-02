@@ -1,0 +1,4 @@
+include LICENSE
+include config/app.cfg
+graft tests
+global-exclude *.pyc

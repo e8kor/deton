@@ -1,0 +1,9 @@
+## Python requirements for using the deton application.
+##
+##    pip install --requirement=requirements.txt
+##
+PyYAML>=3.11
+python-dotenv
+Flask
+redis
+click

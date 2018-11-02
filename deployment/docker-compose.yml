@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  api:
+    image: deton:latest
+    volumes:
+      - ./config:/config
+    ports:
+      - "4140:4140"
+    environment:
+        FLASK_ENV: 'development'
+        FLASK_DEBUG: 'True'
+        FLASK_APP: 'src'
+        FLASK_RUN_PORT: 4140
+        TESTING: 'False'
+        APP_CONFIG: '/config/app.cfg'
+    restart: always
+  
+  redis-primary:
+    image: 'bitnami/redis:latest'
+    ports:
+      - 6379
+    volumes: 
+      - ./primary:/bitnami/redis/data
+    environment:
+      REDIS_REPLICATION_MODE: master
+      REDIS_PASSWORD: changeme
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+
+  redis-secondary:
+    image: 'bitnami/redis:latest'
+    ports:
+      - 6379
+    volumes: 
+      - ./secondary:/bitnami/redis/data
+    depends_on:
+      - redis-primary
+    environment:
+      REDIS_REPLICATION_MODE: slave
+      REDIS_MASTER_HOST: redis-primary
+      REDIS_MASTER_PORT_NUMBER: 6379
+      REDIS_MASTER_PASSWORD: changeme
+      REDIS_PASSWORD: changeme
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    restart: always
+    depends_on:
+      - redis-primary
+      - redis-secondary
+    environment:
+      REDIS_PASSWORD: 
+      REDIS_HOSTS: primary:redis-primary:6379:0:changeme,secondary:redis-secondary:6379:0:changeme
+    ports:
+      - "8081:8081"
