@@ -7,7 +7,7 @@ import os
 
 from flask import current_app, g
 from flask.cli import with_appcontext
-from redis import ConnectionPool, Redis
+from redis import StrictRedis
 
 def get_cache():
     """Connect to the application's configured redis. The connection
@@ -15,14 +15,12 @@ def get_cache():
     again.
     """
     if 'redis' not in g:
-        pool = ConnectionPool(
+        redis = StrictRedis(
             host = current_app.config['REDIS_HOST'], 
             port = current_app.config['REDIS_PORT'], 
-            db   = current_app.config['REDIS_DB'],
+            ssl = current_app.config['REDIS_SSL'],
             password = os.environ['REDIS_PASSWORD']
         )
-        redis = Redis(connection_pool = pool)
-        g.redis_pool = pool
         g.redis = redis
 
     return g.redis
