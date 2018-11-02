@@ -1,5 +1,4 @@
 import io
-
 from setuptools import find_packages, setup
 
 with io.open('README.rst', 'rt', encoding='utf8') as f:
@@ -7,7 +6,7 @@ with io.open('README.rst', 'rt', encoding='utf8') as f:
 
 setup(
     name = 'deton',
-    packages=['src'],
+    packages=['deton'],
     version = '1.0.0',
     license='BSD',
     author = "Eugene Korniichuk",
