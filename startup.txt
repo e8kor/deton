@@ -1,1 +1,1 @@
-src
+APP_CONFIG="./config/app.cfg" application:app
