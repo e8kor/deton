@@ -3,6 +3,7 @@ Redis Cache Management
 """
 import functools
 import click
+import os
 
 from flask import current_app, g
 from flask.cli import with_appcontext
@@ -18,7 +19,8 @@ def get_cache():
             host = current_app.config['REDIS_HOST'], 
             port = current_app.config['REDIS_PORT'], 
             db   = current_app.config['REDIS_DB'],
-            password = current_app.config['REDIS_PASSWORD']
+            ssl = current_app.config['REDIS_SSL'],
+            password = os.environ['REDIS_PASSWORD']
         )
         redis = Redis(connection_pool = pool)
         g.redis_pool = pool
