@@ -1,0 +1,1 @@
+FLASK_ENV = 'development' FLASK_DEBUG = 'True' FLASK_APP = 'src' TESTING = 'False' APP_CONFIG = '../config/app.cfg' flask run -h 0.0.0.0 -p 80
