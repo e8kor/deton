@@ -19,7 +19,6 @@ def get_cache():
             host = current_app.config['REDIS_HOST'], 
             port = current_app.config['REDIS_PORT'], 
             db   = current_app.config['REDIS_DB'],
-            ssl = current_app.config['REDIS_SSL'],
             password = os.environ['REDIS_PASSWORD']
         )
         redis = Redis(connection_pool = pool)
