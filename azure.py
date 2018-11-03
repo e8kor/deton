@@ -1,5 +1,5 @@
 """
-This script runs the Deton application using a development server.
+Application entrypoint compatible with Azure
 """
 import src
 import os 

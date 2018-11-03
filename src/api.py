@@ -1,5 +1,5 @@
 """
-Link Management Routes
+Application Http Routes
 """
 import functools
 import random
@@ -8,10 +8,20 @@ from flask import Blueprint, redirect, request, current_app as app, json, jsonif
 
 bp = Blueprint('api', __name__)
 
-@bp.route('/health')
+@bp.route('/health', methods=['GET'])
 def health():
-    msg = jsonify({'message': 'healthy'})
-    return msg, 200
+    r = get_cache()
+    try:
+        if (r.ping() == 'PONG'):
+            msg = jsonify({'message': 'healthy'})
+            return msg, 200
+        else :
+            msg = jsonify({'message': 'unhealty'})
+            return msg, 404
+    except:
+        msg = jsonify({'message': 'unavailable'})
+        return msg, 503
+   
 
 @bp.route('/roulette', methods=['GET'])
 def roulette():
