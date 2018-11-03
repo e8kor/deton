@@ -1,5 +1,5 @@
 
-# Deton
+# Deton [![Docker Build Status](https://img.shields.io/docker/build/jrottenberg/ffmpeg.svg)](https://github.com/e8kor/deton)
 
 URL shortener on steroids.
 
