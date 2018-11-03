@@ -49,7 +49,7 @@ def create(key):
     else:
         payload = request.get_json(force = True) 
         dump = request_to_dict(request)
-        if (payload['roulette']):
+        if 'roulette' in payload:
             r.set('roulette', key)
         r.set(key, payload['url'])
         r.hmset(key + ":founder", dump)
@@ -62,7 +62,7 @@ def override(key):
     if (r.exists(key)):
         payload = request.get_json(force = True) 
         dump = request_to_dict(request)
-        if (payload['roulette']):
+        if 'roulette' in payload:
             r.set('roulette', key)
         r.set(key, payload['url'])
         r.hmset(key + ":founder", dump)
