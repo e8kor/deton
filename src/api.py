@@ -26,7 +26,7 @@ def health():
 @bp.route('/roulette', methods=['GET'])
 def roulette():
     r = get_cache()
-    keys = r.get('roulette')
+    keys = r.smembers('roulette')
     if (keys is None):
         msg = jsonify({'message': 'No links for roulette'})
         return msg, 404
@@ -60,7 +60,7 @@ def create(key):
         payload = request.get_json(force = True) 
         dump = request_to_dict(request)
         if 'roulette' in payload:
-            r.set('roulette', key)
+            r.sadd('roulette', key)
         r.set(key, payload['url'])
         r.hmset(key + ":founder", dump)
         msg = jsonify({'message': 'Link Created'})
@@ -73,7 +73,7 @@ def override(key):
         payload = request.get_json(force = True) 
         dump = request_to_dict(request)
         if 'roulette' in payload:
-            r.set('roulette', key)
+            r.sadd('roulette', key)
         r.set(key, payload['url'])
         r.hmset(key + ":founder", dump)
         msg = jsonify({'message': 'Link Updated'})
