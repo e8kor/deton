@@ -12,7 +12,7 @@ bp = Blueprint('api', __name__)
 def health():
     r = get_cache()
     try:
-        if (r.ping() == 'PONG'):
+        if r.ping() == 'PONG':
             msg = jsonify({'message': 'healthy'})
             return msg, 200
         else :
@@ -27,7 +27,7 @@ def health():
 def roulette():
     r = get_cache()
     keys = r.smembers('roulette')
-    if (keys is None):
+    if keys is None or len(keys) <= 0:
         msg = jsonify({'message': 'No links for roulette'})
         return msg, 404
     else:
@@ -40,8 +40,7 @@ def roulette():
 @bp.route('/<key>', methods=['GET'])
 def forward(key):
     r = get_cache()
-    
-    if (r.exists(key)) :
+    if  r.exists(key) :
         value = r.get(key) 
         dump = request_to_dict(request)
         r.sadd(key + ":client", dump)
@@ -53,7 +52,7 @@ def forward(key):
 @bp.route('/<key>', methods=['POST'])
 def create(key):
     r = get_cache()
-    if (r.exists(key)):
+    if r.exists(key):
         msg = jsonify({'message': 'Link with key ' + key + ' already exists'})
         return msg, 502
     else:
@@ -69,7 +68,7 @@ def create(key):
 @bp.route('/<key>', methods=['PUT'])
 def override(key):
     r = get_cache()
-    if (r.exists(key)):
+    if r.exists(key):
         payload = request.get_json(force = True) 
         dump = request_to_dict(request)
         if 'roulette' in payload:
