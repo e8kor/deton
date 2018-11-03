@@ -31,7 +31,7 @@ def roulette():
         msg = jsonify({'message': 'No links for roulette'})
         return msg, 404
     else:
-        key = random.sample(keys,1)[0]
+        key = str(random.sample(keys,1)[0])
         value = r.get(key) 
         dump = request_to_dict(request)
         r.sadd(key + ":client", dump)
