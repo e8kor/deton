@@ -1,6 +1,6 @@
 github: [metadata]
 encoding: UTF-8
-theme: jekyll-theme-minimal
+theme: minima
 kramdown:
   input: GFM
   hard_wrap: false
