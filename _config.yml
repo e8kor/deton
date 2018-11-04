@@ -1,6 +1,8 @@
+title: Deton Service
+description: URL shortener on steroids.
 github: [metadata]
 encoding: UTF-8
-theme: minima
+theme: jekyll-theme-slate
 kramdown:
   input: GFM
   hard_wrap: false
