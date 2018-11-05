@@ -8,6 +8,5 @@ ENV FLASK_ENV 'production'
 ENV FLASK_APP 'src'
 ENV FLASK_RUN_PORT 4140
 ENV APP_CONFIG '/app/instance/config/app.cfg'
-ENV REDIS_PASSWORD 'changeme'
 RUN pip install -r requirements.txt
 CMD ["flask", "run", "--host", "0.0.0.0"]

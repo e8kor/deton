@@ -12,7 +12,7 @@ bp = Blueprint('api', __name__)
 def health():
     r = get_cache()
     try:
-        if r.ping() == 'PONG':
+        if (r.ping()):
             msg = jsonify({'message': 'healthy'})
             return msg, 200
         else :
@@ -22,7 +22,6 @@ def health():
         msg = jsonify({'message': 'unavailable'})
         return msg, 503
    
-
 @bp.route('/roulette', methods=['GET'])
 def roulette():
     r = get_cache()
